@@ -1,0 +1,173 @@
+export const APP_NAME = "DocuMind AI";
+export const APP_DESCRIPTION =
+  "AI-powered documentation generator for your codebase. Upload ZIP, files, or a GitHub URL and get beautiful, comprehensive documentation in seconds.";
+export const APP_URL = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
+
+export const PLANS = {
+  free: {
+    name: "Free",
+    generationsPerDay: 5,
+    maxFileSizeMB: 10,
+    maxZipSizeMB: 50,
+    maxFilesPerUpload: 100,
+  },
+  pro: {
+    name: "Pro",
+    generationsPerDay: 50,
+    maxFileSizeMB: 50,
+    maxZipSizeMB: 200,
+    maxFilesPerUpload: 500,
+  },
+  enterprise: {
+    name: "Enterprise",
+    generationsPerDay: -1, // Unlimited
+    maxFileSizeMB: 100,
+    maxZipSizeMB: 500,
+    maxFilesPerUpload: 2000,
+  },
+} as const;
+
+export const IGNORE_PATTERNS = [
+  "node_modules",
+  ".next",
+  "dist",
+  "build",
+  "coverage",
+  ".git",
+  ".cache",
+  "out",
+  "vendor",
+  "tmp",
+  "logs",
+  ".nyc_output",
+  ".turbo",
+  ".vercel",
+  "__pycache__",
+  ".pytest_cache",
+  "venv",
+  ".venv",
+  "env",
+  ".env",
+  "target",
+  "Pods",
+  ".gradle",
+  ".idea",
+  ".vscode",
+  "*.log",
+  "*.lock",
+  "yarn.lock",
+  "package-lock.json",
+  "pnpm-lock.yaml",
+  ".DS_Store",
+  "Thumbs.db",
+];
+
+export const SUPPORTED_EXTENSIONS = [
+  "ts", "tsx", "js", "jsx", "mjs", "cjs",
+  "py", "pyw",
+  "go",
+  "rs",
+  "java", "kt",
+  "swift",
+  "cs",
+  "cpp", "cc", "cxx", "c", "h", "hpp",
+  "php",
+  "rb",
+  "dart",
+  "vue",
+  "svelte",
+  "html", "htm",
+  "css", "scss", "sass", "less",
+  "sql",
+  "sh", "bash", "zsh", "fish",
+  "yaml", "yml",
+  "json", "json5",
+  "toml",
+  "xml",
+  "md", "mdx",
+  "env", "env.example", "env.local",
+  "dockerfile", "Dockerfile",
+  "makefile", "Makefile",
+  "prisma",
+  "graphql", "gql",
+];
+
+export const CONFIG_FILES = [
+  "package.json",
+  "tsconfig.json",
+  "next.config.ts",
+  "next.config.js",
+  "vite.config.ts",
+  "webpack.config.js",
+  "babel.config.js",
+  ".babelrc",
+  "tailwind.config.ts",
+  "tailwind.config.js",
+  "postcss.config.js",
+  "eslint.config.js",
+  ".eslintrc.json",
+  ".eslintrc.js",
+  "prettier.config.js",
+  ".prettierrc",
+  "jest.config.js",
+  "jest.config.ts",
+  "vitest.config.ts",
+  "playwright.config.ts",
+  "docker-compose.yml",
+  "docker-compose.yaml",
+  "Dockerfile",
+  ".github/workflows",
+  "requirements.txt",
+  "pyproject.toml",
+  "setup.py",
+  "go.mod",
+  "Cargo.toml",
+  "pom.xml",
+  "build.gradle",
+  "Gemfile",
+  "composer.json",
+  "pubspec.yaml",
+];
+
+export const FRAMEWORK_PATTERNS: Record<string, string[]> = {
+  "Next.js": ["next.config", "pages/_app", "app/layout"],
+  "React": ["react-dom", "react-scripts"],
+  "Vue": ["vue.config", "nuxt.config", "@vue/core"],
+  "Angular": ["angular.json", "@angular/core"],
+  "Svelte": ["svelte.config", "@sveltejs/kit"],
+  "Vite": ["vite.config"],
+  "Express": ["express"],
+  "Fastify": ["fastify"],
+  "NestJS": ["@nestjs/core"],
+  "Django": ["django", "manage.py"],
+  "Flask": ["flask", "app.py"],
+  "FastAPI": ["fastapi", "uvicorn"],
+  "Spring Boot": ["spring-boot", "pom.xml"],
+  "Laravel": ["artisan", "laravel"],
+  "Ruby on Rails": ["Gemfile", "config/routes.rb"],
+  "Flutter": ["pubspec.yaml", "flutter"],
+};
+
+export const LANGUAGE_EXTENSIONS: Record<string, string[]> = {
+  TypeScript: ["ts", "tsx"],
+  JavaScript: ["js", "jsx", "mjs"],
+  Python: ["py"],
+  Go: ["go"],
+  Rust: ["rs"],
+  Java: ["java"],
+  Kotlin: ["kt"],
+  Swift: ["swift"],
+  "C#": ["cs"],
+  "C++": ["cpp", "cc", "cxx"],
+  C: ["c", "h"],
+  PHP: ["php"],
+  Ruby: ["rb"],
+  Dart: ["dart"],
+};
+
+export const MAX_CHUNK_SIZE = 50000; // chars per chunk sent to Gemini
+export const MAX_FILES_PER_CHUNK = 20;
+export const GEMINI_MODEL = "gemini-2.5-flash";
+export const SUPABASE_UPLOAD_BUCKET = "uploads";
+export const SUPABASE_EXPORT_BUCKET = "exports";
+export const SUPABASE_AVATAR_BUCKET = "avatars";
