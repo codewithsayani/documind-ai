@@ -59,7 +59,7 @@ export default function SearchPage() {
         {!hasSearched ? (
           <motion.div key="empty" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
             <EmptyState
-              icon={Search}
+              icon={<Search className="w-8 h-8 text-muted-foreground" />}
               title="Start searching"
               description="Type at least 2 characters to search across your projects and documentation."
             />
@@ -67,7 +67,7 @@ export default function SearchPage() {
         ) : results.length === 0 && !isLoading ? (
           <motion.div key="no-results" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
             <EmptyState
-              icon={Search}
+              icon={<Search className="w-8 h-8 text-muted-foreground" />}
               title={`No results for "${query}"`}
               description="Try different keywords or check your spelling."
             />

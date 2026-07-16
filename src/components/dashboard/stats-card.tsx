@@ -5,11 +5,12 @@ import { cn } from "@/lib/utils";
 import { LucideIcon } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
 import { TrendingUp } from "lucide-react";
+import { ReactNode } from "react";
 
 interface StatsCardProps {
   title: string;
   value: string | number;
-  icon: LucideIcon;
+  icon: ReactNode;
   description: string;
   trend?: number;
   isLimit?: boolean;
@@ -19,7 +20,7 @@ interface StatsCardProps {
 export function StatsCard({
   title,
   value,
-  icon: Icon,
+  icon,
   description,
   trend,
   isLimit,
@@ -32,8 +33,8 @@ export function StatsCard({
       className="rounded-xl border border-border bg-card p-4 hover:shadow-md transition-shadow"
     >
       <div className="flex items-start justify-between mb-3">
-        <div className="p-2 rounded-lg bg-primary/10">
-          <Icon className="w-4 h-4 text-primary" />
+        <div className="p-2 rounded-lg bg-primary/10 flex items-center justify-center">
+          {icon}
         </div>
         {trend !== undefined && (
           <div className="flex items-center gap-1 text-xs text-green-500">

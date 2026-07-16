@@ -32,9 +32,9 @@ export default async function ProjectsPage() {
       {/* Projects Grid */}
       {projects.length === 0 ? (
         <EmptyState
-          icon={FolderOpen}
-          title="No projects yet"
-          description="Upload your first codebase to get comprehensive AI-generated documentation."
+          icon={<FolderOpen className="w-8 h-8 text-muted-foreground" />}
+          title="No projects found"
+          description="You haven't uploaded any projects yet. Upload your first codebase to get started."
           action={
             <Button asChild>
               <Link href="/projects/new">

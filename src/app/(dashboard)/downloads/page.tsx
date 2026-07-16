@@ -43,7 +43,7 @@ export default async function DownloadsPage() {
 
       {!downloads || downloads.length === 0 ? (
         <EmptyState
-          icon={Download}
+          icon={<Download className="w-8 h-8 text-muted-foreground" />}
           title="No downloads yet"
           description="Export documentation as Markdown, README, or PDF to see your download history here."
           action={

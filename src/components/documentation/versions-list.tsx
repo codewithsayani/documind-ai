@@ -44,7 +44,7 @@ export function VersionsList({ documentationId, versions: initialVersions }: Ver
   if (versions.length === 0) {
     return (
       <EmptyState
-        icon={GitBranch}
+        icon={<GitBranch className="w-8 h-8 text-muted-foreground" />}
         title="No version history"
         description="Versions are created automatically when you save or regenerate documentation."
       />

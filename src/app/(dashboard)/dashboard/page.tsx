@@ -52,28 +52,28 @@ export default async function DashboardPage() {
         <StatsCard
           title="Total Projects"
           value={stats?.totalProjects || 0}
-          icon={FolderOpen}
+          icon={<FolderOpen className="w-4 h-4 text-primary" />}
           description="Projects uploaded"
           trend={12}
         />
         <StatsCard
           title="Documentations"
           value={stats?.totalDocumentations || 0}
-          icon={FileText}
+          icon={<FileText className="w-4 h-4 text-primary" />}
           description="Docs generated"
           trend={8}
         />
         <StatsCard
           title="Downloads"
           value={stats?.totalDownloads || 0}
-          icon={Download}
+          icon={<Download className="w-4 h-4 text-primary" />}
           description="Files exported"
           trend={5}
         />
         <StatsCard
           title="Daily Usage"
           value={`${stats?.generationsToday || 0}/${stats?.generationsLimit || 5}`}
-          icon={Zap}
+          icon={<Zap className="w-4 h-4 text-primary" />}
           description="Generations today"
           isLimit
           limitPercent={
@@ -97,7 +97,7 @@ export default async function DashboardPage() {
 
           {recentProjects.length === 0 ? (
             <EmptyState
-              icon={FolderOpen}
+              icon={<FolderOpen className="w-8 h-8 text-muted-foreground" />}
               title="No projects yet"
               description="Upload your first codebase to get AI-powered documentation in seconds."
               action={

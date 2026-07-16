@@ -19,9 +19,9 @@ export default async function HistoryPage() {
       </div>
       {activity.length === 0 ? (
         <EmptyState
-          icon={History}
-          title="No activity yet"
-          description="Create your first project to start building your history."
+          icon={<History className="w-8 h-8 text-muted-foreground" />}
+          title="No history yet"
+          description="Your activity log will appear here once you start generating documentation."
         />
       ) : (
         <ActivityFeed activities={activity} />
