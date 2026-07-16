@@ -31,7 +31,7 @@ export async function signUp(formData: FormData) {
 
   const { email, password, fullName } = parsed.data;
 
-  const { error } = await supabase.auth.signUp({
+  const { data, error } = await supabase.auth.signUp({
     email,
     password,
     options: {
@@ -42,6 +42,11 @@ export async function signUp(formData: FormData) {
 
   if (error) {
     return { error: error.message };
+  }
+
+  // If email confirmation is disabled in Supabase, the user is logged in immediately
+  if (data?.session) {
+    redirect("/dashboard");
   }
 
   return { success: "Check your email to confirm your account!" };
