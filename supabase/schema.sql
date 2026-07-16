@@ -233,58 +233,91 @@ ALTER TABLE public.settings ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.activity_logs ENABLE ROW LEVEL SECURITY;
 
 -- Profiles policies
+DROP POLICY IF EXISTS "Users can view own profile" ON public.profiles;
 CREATE POLICY "Users can view own profile" ON public.profiles FOR SELECT USING (auth.uid() = id);
+DROP POLICY IF EXISTS "Users can update own profile" ON public.profiles;
 CREATE POLICY "Users can update own profile" ON public.profiles FOR UPDATE USING (auth.uid() = id);
+DROP POLICY IF EXISTS "Users can insert own profile" ON public.profiles;
 CREATE POLICY "Users can insert own profile" ON public.profiles FOR INSERT WITH CHECK (auth.uid() = id);
 
 -- Projects policies
+DROP POLICY IF EXISTS "Users can view own projects" ON public.projects;
 CREATE POLICY "Users can view own projects" ON public.projects FOR SELECT USING (auth.uid() = user_id);
+DROP POLICY IF EXISTS "Users can insert own projects" ON public.projects;
 CREATE POLICY "Users can insert own projects" ON public.projects FOR INSERT WITH CHECK (auth.uid() = user_id);
+DROP POLICY IF EXISTS "Users can update own projects" ON public.projects;
 CREATE POLICY "Users can update own projects" ON public.projects FOR UPDATE USING (auth.uid() = user_id);
+DROP POLICY IF EXISTS "Users can delete own projects" ON public.projects;
 CREATE POLICY "Users can delete own projects" ON public.projects FOR DELETE USING (auth.uid() = user_id);
 
 -- Uploads policies
+DROP POLICY IF EXISTS "Users can view own uploads" ON public.uploads;
 CREATE POLICY "Users can view own uploads" ON public.uploads FOR SELECT USING (auth.uid() = user_id);
+DROP POLICY IF EXISTS "Users can insert own uploads" ON public.uploads;
 CREATE POLICY "Users can insert own uploads" ON public.uploads FOR INSERT WITH CHECK (auth.uid() = user_id);
+DROP POLICY IF EXISTS "Users can update own uploads" ON public.uploads;
 CREATE POLICY "Users can update own uploads" ON public.uploads FOR UPDATE USING (auth.uid() = user_id);
+DROP POLICY IF EXISTS "Users can delete own uploads" ON public.uploads;
 CREATE POLICY "Users can delete own uploads" ON public.uploads FOR DELETE USING (auth.uid() = user_id);
 
 -- Documentations policies
+DROP POLICY IF EXISTS "Users can view own documentations" ON public.documentations;
 CREATE POLICY "Users can view own documentations" ON public.documentations FOR SELECT USING (auth.uid() = user_id);
+DROP POLICY IF EXISTS "Users can insert own documentations" ON public.documentations;
 CREATE POLICY "Users can insert own documentations" ON public.documentations FOR INSERT WITH CHECK (auth.uid() = user_id);
+DROP POLICY IF EXISTS "Users can update own documentations" ON public.documentations;
 CREATE POLICY "Users can update own documentations" ON public.documentations FOR UPDATE USING (auth.uid() = user_id);
+DROP POLICY IF EXISTS "Users can delete own documentations" ON public.documentations;
 CREATE POLICY "Users can delete own documentations" ON public.documentations FOR DELETE USING (auth.uid() = user_id);
 
 -- Documentation versions policies
+DROP POLICY IF EXISTS "Users can view own doc versions" ON public.documentation_versions;
 CREATE POLICY "Users can view own doc versions" ON public.documentation_versions FOR SELECT USING (auth.uid() = user_id);
+DROP POLICY IF EXISTS "Users can insert own doc versions" ON public.documentation_versions;
 CREATE POLICY "Users can insert own doc versions" ON public.documentation_versions FOR INSERT WITH CHECK (auth.uid() = user_id);
+DROP POLICY IF EXISTS "Users can delete own doc versions" ON public.documentation_versions;
 CREATE POLICY "Users can delete own doc versions" ON public.documentation_versions FOR DELETE USING (auth.uid() = user_id);
 
 -- Downloads policies
+DROP POLICY IF EXISTS "Users can view own downloads" ON public.downloads;
 CREATE POLICY "Users can view own downloads" ON public.downloads FOR SELECT USING (auth.uid() = user_id);
+DROP POLICY IF EXISTS "Users can insert own downloads" ON public.downloads;
 CREATE POLICY "Users can insert own downloads" ON public.downloads FOR INSERT WITH CHECK (auth.uid() = user_id);
 
 -- Usage logs policies
+DROP POLICY IF EXISTS "Users can view own usage logs" ON public.usage_logs;
 CREATE POLICY "Users can view own usage logs" ON public.usage_logs FOR SELECT USING (auth.uid() = user_id);
+DROP POLICY IF EXISTS "Users can insert own usage logs" ON public.usage_logs;
 CREATE POLICY "Users can insert own usage logs" ON public.usage_logs FOR INSERT WITH CHECK (auth.uid() = user_id);
 
 -- Daily limits policies
+DROP POLICY IF EXISTS "Users can view own daily limits" ON public.daily_limits;
 CREATE POLICY "Users can view own daily limits" ON public.daily_limits FOR SELECT USING (auth.uid() = user_id);
+DROP POLICY IF EXISTS "Users can insert own daily limits" ON public.daily_limits;
 CREATE POLICY "Users can insert own daily limits" ON public.daily_limits FOR INSERT WITH CHECK (auth.uid() = user_id);
+DROP POLICY IF EXISTS "Users can update own daily limits" ON public.daily_limits;
 CREATE POLICY "Users can update own daily limits" ON public.daily_limits FOR UPDATE USING (auth.uid() = user_id);
 
 -- Favorites policies
+DROP POLICY IF EXISTS "Users can view own favorites" ON public.favorites;
 CREATE POLICY "Users can view own favorites" ON public.favorites FOR SELECT USING (auth.uid() = user_id);
+DROP POLICY IF EXISTS "Users can insert own favorites" ON public.favorites;
 CREATE POLICY "Users can insert own favorites" ON public.favorites FOR INSERT WITH CHECK (auth.uid() = user_id);
+DROP POLICY IF EXISTS "Users can delete own favorites" ON public.favorites;
 CREATE POLICY "Users can delete own favorites" ON public.favorites FOR DELETE USING (auth.uid() = user_id);
 
 -- Settings policies
+DROP POLICY IF EXISTS "Users can view own settings" ON public.settings;
 CREATE POLICY "Users can view own settings" ON public.settings FOR SELECT USING (auth.uid() = user_id);
+DROP POLICY IF EXISTS "Users can insert own settings" ON public.settings;
 CREATE POLICY "Users can insert own settings" ON public.settings FOR INSERT WITH CHECK (auth.uid() = user_id);
+DROP POLICY IF EXISTS "Users can update own settings" ON public.settings;
 CREATE POLICY "Users can update own settings" ON public.settings FOR UPDATE USING (auth.uid() = user_id);
 
 -- Activity logs policies
+DROP POLICY IF EXISTS "Users can view own activity logs" ON public.activity_logs;
 CREATE POLICY "Users can view own activity logs" ON public.activity_logs FOR SELECT USING (auth.uid() = user_id);
+DROP POLICY IF EXISTS "Users can insert own activity logs" ON public.activity_logs;
 CREATE POLICY "Users can insert own activity logs" ON public.activity_logs FOR INSERT WITH CHECK (auth.uid() = user_id);
 
 -- =============================================================================
@@ -318,20 +351,26 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
+DROP TRIGGER IF EXISTS handle_profiles_updated_at ON public.profiles;
 CREATE TRIGGER handle_profiles_updated_at BEFORE UPDATE ON public.profiles
   FOR EACH ROW EXECUTE FUNCTION public.handle_updated_at();
 
+DROP TRIGGER IF EXISTS handle_projects_updated_at ON public.projects;
 CREATE TRIGGER handle_projects_updated_at BEFORE UPDATE ON public.projects
   FOR EACH ROW EXECUTE FUNCTION public.handle_updated_at();
 
+DROP TRIGGER IF EXISTS handle_uploads_updated_at ON public.uploads;
 CREATE TRIGGER handle_uploads_updated_at BEFORE UPDATE ON public.uploads
   FOR EACH ROW EXECUTE FUNCTION public.handle_updated_at();
 
+DROP TRIGGER IF EXISTS handle_documentations_updated_at ON public.documentations;
 CREATE TRIGGER handle_documentations_updated_at BEFORE UPDATE ON public.documentations
   FOR EACH ROW EXECUTE FUNCTION public.handle_updated_at();
 
+DROP TRIGGER IF EXISTS handle_daily_limits_updated_at ON public.daily_limits;
 CREATE TRIGGER handle_daily_limits_updated_at BEFORE UPDATE ON public.daily_limits
   FOR EACH ROW EXECUTE FUNCTION public.handle_updated_at();
 
+DROP TRIGGER IF EXISTS handle_settings_updated_at ON public.settings;
 CREATE TRIGGER handle_settings_updated_at BEFORE UPDATE ON public.settings
   FOR EACH ROW EXECUTE FUNCTION public.handle_updated_at();
